@@ -32,12 +32,12 @@
 <body>
     @include('components.navbar')
 
+    <!-- Detail Produk Utama -->
     <div class="container mt-5 content">
         <div class="card p-4">
             <div class="row align-items-center">
                 <div class="col-md-4 mb-4 mb-md-0 img-container">
-                    <!-- Pastikan untuk menggunakan path gambar yang benar -->
-                    <img src="{{ asset('storage/' . $products->image) }}" alt="Deskripsi Gambar" class="img-fluid">
+                    <img src="{{ asset('storage/' . $productDetail->image) }}" alt="{{ $productDetail->name }}" class="img-fluid">
                 </div>
 
                 <div class="col-md-8">
@@ -45,32 +45,51 @@
                         <tbody>
                             <tr>
                                 <td><strong>Model:</strong></td>
-                                <td>{{ $products->name }}</td>
+                                <td>{{ $productDetail->name }}</td>
                             </tr>
                             <tr>
                                 <td><strong>WIRE :</strong></td>
-                                <td>{{ $products->Wire }}</td>
+                                <td>{{ $productDetail->Wire }}</td>
                             </tr>
                             <tr>
                                 <td><strong>OUTSIDE:</strong></td>
-                                <td>{{ $products->Outside }}</td>
+                                <td>{{ $productDetail->Outside }}</td>
                             </tr>
                             <tr>
                                 <td><strong>FREE HEIGHT:</strong></td>
-                                <td>{{ $products->Free_height }}</td>
+                                <td>{{ $productDetail->Free_height }}</td>
                             </tr>
                             <tr>
                                 <td><strong>SOLID HEIGHT:</strong></td>
-                                <td>{{ $products->Solid_height }}</td>
+                                <td>{{ $productDetail->Solid_height }}</td>
                             </tr>
                             <tr>
                                 <td><strong>SPRING RATE:</strong></td>
-                                <td>{{ $products->Spring_rate }}</td>
+                                <td>{{ $productDetail->Spring_rate }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Produk Lain di Kategori yang Sama -->
+    <div class="container">
+        <h2 class="mt-5">Produk Lain di Kategori yang Sama</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 py-5">
+            @foreach($relatedProducts as $product)
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">{{ $product->description }}</p>
+                            <a href="{{ route('detail', $product->id) }}" class="btn btn-primary">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

@@ -11,38 +11,51 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Categories::all();
-        $selectedCategoryId = $request->input('category_id', $categories->first()->id);
-        $products = Products::where('category_id', $selectedCategoryId)->get();
-        return view('index', compact('categories', 'products', 'selectedCategoryId'));
+        return view('index');
     }
 
     public function about()
     {
         return view('about');
     }
+    public function cvt()
+{
+    $products = products::where('category_id', 1)->get(); // '1' untuk kategori CVT
+    return view('categories.cvt', compact('products'));
+}
 
-    public function produk()
-    {
-        $products = Products::all();
-        return view('produk', compact('products'));
-    }
+public function valve()
+{
+    $products = Products::where('category_id', 2)->get(); // '2' untuk kategori Valve
+    return view('categories.valve', compact('products'));
+}
 
+public function clutch()
+{
+    $products = Products::where('category_id', 3)->get(); // '3' untuk kategori Clutch
+    return view('categories.clutch', compact('products'));
+}
 
-    public function show($id, Request $request)
-    {
-        $categories = Categories::all();
-        $category = Categories::findOrFail($id);
-        $selectedCategoryId = $id;
-        $products = Products::where('category_id', $selectedCategoryId)->get();
-        return view('index', compact('categories', 'selectedCategoryId', 'category', 'products'));
-    }
+public function sentri()
+{
+    $products = Products::where('category_id', 4)->get(); // '4' untuk kategori Sentri
+    return view('categories.sentri', compact('products'));
+}
 
-    public function showProduct($id)
-    {
-        $products = Products::find($id);
-        return view('product.show', compact('products'));
-    }
+public function showProduct($id)
+{
+    $products = Products::find($id);
+    // Ambil produk berdasarkan ID yang dipilih
+    $productDetail = Products::findOrFail($id);
+
+    // Ambil produk lain di kategori yang sama, kecuali produk yang sedang ditampilkan
+    $relatedProducts = Products::where('category_id', $productDetail->category_id)
+                               ->where('id', '!=', $id)
+                               ->get();
+
+    // Kirim data ke view
+    return view('product.show', compact('productDetail', 'relatedProducts', 'products'));
+}
 
     public function create()
     {

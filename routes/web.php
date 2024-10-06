@@ -31,7 +31,11 @@ Route::middleware(['auth'])->group(function () {
 //index
 
 
-Route::get('/category/{id}', [ProductController::class, 'show'])->name('category.show');
+Route::get('/cvt', [ProductController::class, 'cvt'])->name('categories.cvt');
+Route::get('/valve', [ProductController::class, 'valve'])->name('categories.valve');
+Route::get('/clutch', [ProductController::class, 'clutch'])->name('categories.clutch');
+Route::get('/sentri', [ProductController::class, 'sentri'])->name('categories.sentri');
+
 Route::get('/about', [ProductController::class, 'about'])->name('about');
 Route::get('/produk', [ProductController::class, 'produk'])->name('produk');
 

@@ -9,7 +9,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('images/mtn.png') }}" alt="MTN" width="30" height="24">
+            </a>
             <form class="d-flex ms-auto me-3" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Cari</button>
